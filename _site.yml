@@ -14,10 +14,6 @@ navbar:
           href: West.html 
         - text: "South"
           href: South.html 
-        - text: "Vickery Meadow"
-          href: VickeryMeadow.html       
-        - text: "Data Dictionary"
-          href: DataDictionary.html   
     - text: "About"
       menu:
         - text: "Github"

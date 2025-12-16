@@ -24,19 +24,23 @@ output:
 
 # **Introduction**
 
-This GitHub website is designed for Builders of Hope. The main purpose of this website is to provide the data dictionary and a summary of the analysis.
+This website presents a neighborhood-level housing and demographic analysis developed in collaboration with **Builders of Hope CDC** to support community-centered housing strategies in Dallas.
+
+The analysis examines long-term trends in population, income, housing stock, land use, and housing market dynamics to identify where affordability pressures, displacement risk, and opportunity intersect. The goal is to provide clear, data-driven insights that inform equitable development, housing preservation, and anti-displacement efforts.
+
+Interactive visualizations and summary findings are provided for each study area to support decision-making by community development organizations, policymakers, and funders.
 
 
 
-# **Tabs**
+# **Study Areas**
  
-1. West Dallas Analysis: TBD
+1. **West Dallas**  
+   A neighborhood experiencing advanced housing market pressure, rising property values, and declining renter presence.
 
-2. South Dallas Analysis: TBD
+2. **South Dallas**  
+   A historically disinvested community approaching a critical market transition point amid accelerating housing market activity.
 
-3. Vickery Meadow Analysis: TBD
 
-4. Data Dictionary: TBD
 
 
 </div>

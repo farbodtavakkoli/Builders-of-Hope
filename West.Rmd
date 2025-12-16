@@ -49,11 +49,25 @@ west_msm <- read_excel("data/Copy of nbhd_West Dallas_v9.xlsx", sheet = "median_
 ```
 
 
-## Title TBD {-}
+## Executive Summary {-}
 
-Caption TBD
+The report provides a longitudinal neighborhood and housing market analysis for the West area, spanning roughly 40 years for demographic trends and 20 years for land use and housing market dynamics. Overall, the West area shows:
 
+* Significant racial and income composition shifts
 
+* Declining population with rising housing costs
+
+* Transition toward higher-value, owner-occupied housing
+
+* Increasing housing market pressure and affordability challenges
+
+These trends are consistent with gentrification and market tightening, with implications for housing stability and displacement risk.
+
+Over the past four decades, the West area has undergone a pronounced demographic and housing transition marked by rising property values, declining renter presence, and a growing share of owner-occupied, single-family housing. Median home values, rents, and price per square foot have increased sharply since the mid-2010s, while total population and renter households have declined. These patterns indicate that housing cost escalation is outpacing resident retention.
+
+## Population & Demographics {-}
+
+This figure illustrates the long-term shift toward a majority-minority population, driven primarily by growth in the Hispanic population and a decline in the White population share.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=11.5,fig.height=5, layout="l-body-outset"}
 west_cd$minority_pop <- west_cd$hispanic_pct + west_cd$black_pct
@@ -71,14 +85,13 @@ ggplot(west_cd_vis, aes(x = year...2, y = value, group=variable,colour=variable)
   ylab("Percentage") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="plasma") +
-  ggtitle("Population distribution by racial groups in the previous 40 years")
+  ggtitle("Population distribution by racial groups in the last 40 years")
 ```
 
 
+## Socioeconomic Indicators {-}
 
-## Title TBD {-}
-
-Caption TBD
+Trends in median income, homeownership, poverty, household count, and population reveal rising housing costs alongside declining population and renter presence.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -89,7 +102,6 @@ west_cd_vis <- west_cd %>%
                        'total_households' = 'Total Households', 'owner_occupied' = 'Owner Occupied'))
 
 
-west_cd_vis <- <- 
 ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   geom_line(aes(color = variable), lwd = 1.5, linetype = "dashed")+
   geom_point(aes(color=variable), lwd=3.5) +
@@ -97,19 +109,17 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   ylab("Value") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="turbo") +
-  ggtitle("Demographic distribution in the previous 40 years") +
+  ggtitle("Demographic distribution in the last 40 years") +
   theme(legend.position="none")
 
 ```
 
 
-## Title TBD {-}
 
-Caption TBD
 
-```{r}
+```{r, include = FALSE}
 
-west_cd_sub <- west_cd %>% dplyr::select(median_gross_rent_adj,inflation,year...2)
+west_cd_sub <- west_cd %>% dplyr::select(median_gross_rent_adj,year...2)
 
 
 z_std <- function(observed) {
@@ -122,7 +132,9 @@ west_cd_sub <- west_cd %>%
   mutate_all(funs(perc_ = z_std(.)))
 ```
 
+## Household Size, Housing Value, and Tenure Trends {-}
 
+Median home values and rents rise sharply over time, while renter-occupied households decline and owner occupancy increases.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd$inflation <- c(0.124, 0.054, 0.034, 0.0316, 0.083)
@@ -137,7 +149,6 @@ west_cd_vis <- west_cd %>%
 
 
 
-west_cd_vis
 ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   geom_line(aes(color = variable), lwd = 1.5, linetype = "dashed")+
   geom_point(aes(color=variable), lwd=3.5)+
@@ -145,14 +156,14 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   ylab("Value") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="turbo") +
-  ggtitle("Demographic distribution in the previous 40 years") +
+  ggtitle("Demographic distribution in the last 40 years") +
   theme(legend.position="none")
 
 ```
                    
-## Title TBD {-}
+## Housing Cost Burden {-}
 
-Caption TBD
+Cost-burdened and severely cost-burdened households persist, highlighting ongoing affordability challenges despite income growth.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -172,13 +183,14 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   ylab("Value") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="turbo") +
-  ggtitle("Demographic distribution in the previous 40 years") +
+  ggtitle("Demographic distribution in the last 40 years") +
   theme(legend.position="none")
 
 ```
-## Title TBD {-}
 
-Caption TBD
+## Household Income Distribution by Bracket {-}
+
+Lower-income households decline substantially over time, while higher-income brackets become more prevalent, indicating economic filtering and displacement risk.
 
 ```{r include=FALSE}
 west_chi_sub <- west_chi %>% replace(is.na(.), 0)
@@ -251,9 +263,9 @@ p9 <- viz_func(west_chi_sub$income_50000_or_more_white, west_chi_sub$income_5000
 # income_35000_50000_white, income_50000_or_more_white
 grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, ncol=3, nrow=4)
 ```
-## Title TBD {-}
+## Land Use Distribution {-}
 
-Caption TBD
+Single-family residential land use dominates development patterns, with limited growth in multifamily or mixed-density housing types.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=12,fig.height=7, layout="l-body-outset"}
 west_lu_sub <- west_lu %>% dplyr::select(year, land_use, total_area_sqft)
@@ -268,14 +280,14 @@ ggplot(west_lu_sub, aes(x = year, y = Percentage, group=Land_Use,colour=Land_Use
   ylab("Percentage") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="plasma") +
-  ggtitle("Land Use distribution in the previous 20 years") + 
+  ggtitle("Land Use distribution in the last 20 years") + 
   labs(color='Land Use') 
 
 ```
 
-## Title TBD {-}
+## Housing Unit Composition by Type {-}
 
-Caption TBD
+Growth in housing units is driven primarily by single-family homes, while duplexes and townhomes decline or stagnate.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=12,fig.height=10, layout="l-body-outset"}
 west_uc_sub <- west_uc %>% dplyr::select(appraisal_yr, total_duplex_units, total_single_family_home_units, total_townhomes_units, total_apartment_units, total_all_units) %>%  replace(is.na(.), 0)
@@ -298,15 +310,14 @@ p2 <- viz_func2(west_uc_sub, west_uc_sub$appraisal_yr, west_uc_sub$total_single_
 p3 <- viz_func2(west_uc_sub, west_uc_sub$appraisal_yr, west_uc_sub$total_townhomes_units, "purple", "Total Townhouse Units")
 p4 <- viz_func2(west_uc_sub, west_uc_sub$appraisal_yr, west_uc_sub$total_apartment_units, "blue", "Total Apartment Units")
 p5 <- viz_func2(west_uc_sub, west_uc_sub$appraisal_yr, west_uc_sub$total_all_units, "green", "Total Units")
-p5
 
 grid.arrange(p1, p2, p3, p4, p5, ncol=2, nrow=3)
 ```
 
 
-## Title TBD {-}
+## Additional Demographic and Economic Trends {-}
 
-Caption TBD
+Foreign-born population, senior share, income, rent, and poverty trends reflect an aging population and rising housing costs amid declining population.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -327,13 +338,13 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   ylab("Value") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="turbo") +
-  ggtitle("Demographic distribution in the previous 40 years") +
+  ggtitle("Demographic distribution in the last 40 years") +
   theme(legend.position="none")
 
 ```
-## Title TBD {-}
+## Housing Market Dynamics {-}
 
-Caption TBD
+Rising sale prices, price per square foot, and tight list-to-sale ratios demonstrate an increasingly competitive housing market with limited affordability.
 
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=15, layout="l-body-outset"}
@@ -356,7 +367,7 @@ ggplot(west_cd_vis, aes(x=sales_year, y=value, group = 1))+
   ylab("Value") +
   xlab("Year") + 
   scale_color_viridis(discrete = TRUE, option="turbo") +
-  ggtitle("House Sale distribution in the previous 20 years")+
+  ggtitle("House Sale distribution in the last 20 years")+
   theme(legend.position="none") +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
 ```

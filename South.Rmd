@@ -49,9 +49,25 @@ west_msm <- read_excel("data/Copy of nbhd_South Dallas - Combined_v9.xlsx", shee
 ```
 
 
-## Title TBD {-}
+## Executive Summary {-}
 
-Caption TBD
+The report provides a longitudinal neighborhood and housing market analysis for the South area, spanning roughly 40 years for demographic trends and 20 years for land use and housing market dynamics. Overall, the South area shows:
+
+Persistent population decline alongside rising housing costs
+
+Long-standing economic vulnerability with recent income growth
+
+Continued dominance of single-family housing with limited affordable options
+
+Accelerating housing market activity and emerging displacement risk
+
+These trends indicate a historically disinvested community entering a period of rapid market change, with significant implications for housing stability and long-term resident retention.
+
+Over the past four decades, the South area has experienced sustained population loss, declining renter and owner households, and persistently high poverty rates, followed by sharp increases in home values, rents, and price per square foot since the mid-2010s. While recent income gains are evident, housing costs are rising more rapidly than household capacity, suggesting that market pressures may intensify displacement risk if affordability protections are not implemented.
+
+## Population & Demographics {-}
+
+The South area remains predominantly Black, with modest increases in Hispanic and White populations and sustained minority representation over time.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=11.5,fig.height=5, layout="l-body-outset"}
 west_cd$minority_pop <- west_cd$hispanic_pct + west_cd$black_pct
@@ -74,9 +90,9 @@ ggplot(west_cd_vis, aes(x = year...2, y = value, group=variable,colour=variable)
 
 
 
-## Title TBD {-}
+## Socioeconomic Indicators {-}
 
-Caption TBD
+Median income increases in recent years, while poverty, renter households, and total population decline, indicating economic stress and out-migration.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -101,9 +117,9 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
 ```
 
 
-## Title TBD {-}
+## Household Size, Housing Value, and Tenure Trends {-}
 
-Caption TBD
+Median home values and rents rise sharply after 2015, while both renter- and owner-occupied households decline.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd$iflation <- c(0.124, 0.054, 0.034, 0.0316, 0.083)
@@ -131,9 +147,9 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
 
 ```
                    
-## Title TBD {-}
+## Housing Cost Burden {-}
 
-Caption TBD
+Cost-burdened and severely cost-burdened households persist, particularly among homeowners, highlighting affordability risks amid rising prices.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -157,9 +173,10 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   theme(legend.position="none")
 
 ```
-## Title TBD {-}
 
-Caption TBD
+## Household Income Distribution by Bracket {-}
+
+Lower-income households remain prevalent, while growth in higher-income brackets emerges only recently, underscoring vulnerability to displacement.
 
 ```{r include=FALSE}
 west_chi_sub <- west_chi %>% replace(is.na(.), 0)
@@ -234,9 +251,9 @@ grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, ncol=3, nrow=4)
 ```
 
 
-## Title TBD {-}
+## Land Use Distribution {-}
 
-Caption TBD
+Single-family residential land use dominates the South area, with limited expansion of multifamily or mixed-density housing options.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=12,fig.height=7, layout="l-body-outset"}
 west_lu_sub <- west_lu %>% dplyr::select(year, land_use, total_area_sqft)
@@ -256,9 +273,9 @@ ggplot(west_lu_sub, aes(x = year, y = Percentage, group=Land_Use,colour=Land_Use
 
 ```
 
-## Title TBD {-}
+## Housing Unit Composition by Type {-}
 
-Caption TBD
+Single-family housing drives total unit counts, while duplexes decline and townhomes remain minimal.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=12,fig.height=10, layout="l-body-outset"}
 west_uc_sub <- west_uc %>% dplyr::select(appraisal_yr, total_duplex_units, total_single_family_home_units, total_townhomes_units, total_apartment_units, total_all_units) %>%  replace(is.na(.), 0)
@@ -285,9 +302,10 @@ p5 <- viz_func2(west_uc_sub, west_uc_sub$appraisal_yr, west_uc_sub$total_all_uni
 
 grid.arrange(p1, p2, p3, p4, p5, ncol=2, nrow=3)
 ```
-## Title TBD {-}
 
-Caption TBD
+## Additional Demographic and Economic Trends {-}
+
+Rising rents and incomes coexist with declining population, persistent poverty, and an aging resident base.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=7, layout="l-body-outset"}
 west_cd_vis <- west_cd %>%
@@ -312,10 +330,10 @@ ggplot(west_cd_vis, aes(x=year...2, y=value, group = 1))+
   theme(legend.position="none")
 
 ```
-## Title TBD {-}
 
-Caption TBD
+## Housing Market Dynamics {-}
 
+Rapid growth in sale prices, new construction, and price per square foot since 2018 reflects accelerating market pressure in a historically affordable area.
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=13,fig.height=15, layout="l-body-outset"}
 west_cd_vis <- west_msm %>%
